@@ -3,7 +3,7 @@ const app = express();
 
 //Route Handler
 app.get('/', (req, res) => {
-	res.send({ aur-bhai: 'kaisa-hai' });
+	res.send({ aurBhai: 'kaisaHai' });
 });
 
 // Dynamic Port Binding
