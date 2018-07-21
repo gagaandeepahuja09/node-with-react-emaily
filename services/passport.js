@@ -18,21 +18,18 @@ passport.use(new GoogleStrategy({
 	clientID: keys.googleClientID,
 	clientSecret: keys.googleClientSecret,
 	callbackURL: '/auth/google/callback',
-	proxy: true
+	proxy: true   
 	},
-	(accessToken, refreshToken, profile, done) => {
+	async(accessToken, refreshToken, profile, done) => {
 		// Create an instance of user and then save it to the database
-		User.findOne({ googleID: profile.id }).then(exisitingUser => {
-			if(exisitingUser) {
-				//User already exists
-				done(null, exisitingUser);
-			}
-			else {
-				// New Model Instance
-				new User({	googleID: profile.id }).save()	
-				.then(user => done(null, user));
-			}
-		});
+		const existingUser = await User.findOne({ googleID: profile.id });
+		if(exisitingUser) {
+			//User already exists
+			return done(null, exisitingUser);
+		}
+		// New Model Instance
+		const user = await new User({	googleID: profile.id }).save();	
+		done(null, user);
 		console.log(profile.id);
 	}
 ));
