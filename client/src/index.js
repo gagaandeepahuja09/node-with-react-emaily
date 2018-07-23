@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 
 import App from './components/App';
 
+// state,action,applyMiddleware
 const store = createStore(() => [], {}, applyMiddleware());
 
 ReactDOM.render(
