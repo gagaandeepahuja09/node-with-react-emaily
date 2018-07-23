@@ -5,9 +5,10 @@ import { createStore, applyMiddleware } from 'redux';
 
 
 import App from './components/App';
+import reducers from './reducers';
 
-// state,action,applyMiddleware
-const store = createStore(() => [], {}, applyMiddleware());
+// reducers,action,applyMiddleware
+const store = createStore(reducers, {}, applyMiddleware());
 
 ReactDOM.render(
 	<Provider store = {store}><App /></Provider>
